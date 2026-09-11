@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaoMail - Hệ Thống Cung Cấp Gmail Uy Tín</title>
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #34a853;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #202124;
+            --text-sub: #5f6368;
+            --border-color: #dadce0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header & Nav */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-sub);
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Banner */
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #e8f0fe 0%, #ffffff 100%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: var(--text-sub);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        /* Products Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: var(--text-sub);
+        }
+
+        .product-features li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-buy {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        .btn-buy:hover {
+            background-color: #1557b0;
+        }
+
+        /* Section Liên Hệ */
+        .contact-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .contact-info-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            background: #e8f0fe;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        .contact-text p, .contact-text a {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+
+        .contact-text a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        /* Contact Form */
+        .contact-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Floating Contact Widget */
+        .floating-contact {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 999;
+        }
+
+        .float-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .float-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .float-zalo { background-color: #0088fe; }
+        .float-telegram { background-color: #0088cc; }
+        .float-facebook { background-color: #1877f2; }
+
+        /* Modal Checkout */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-sub);
+        }
+
+        .qr-area {
+            text-align: center;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            display: none;
+        }
+
+        .bank-info {
+            background: #ffffff;
+            border: 1px dashed var(--primary-color);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .bank-info p {
+            margin-bottom: 4px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #202124;
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            color: #bdc1c6;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="navbar">
+            <div class="logo">📧 BaoMail</div>
+            <div class="nav-links">
+                <a href="#products">Sản Phẩm</a>
+                <a href="#contact">Liên Hệ</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <section class="hero">
+        <h1>BaoMail - Hệ Thống Cung Cấp Gmail Uy Tín & Tự Động</h1>
+        <p>Tài khoản Gmail chất lượng cao, đa dạng chủng loại, bảo hành uy tín 1 đổi 1.</p>
+    </section>
+
+    <!-- Danh Sách Sản Phẩm -->
+    <div class="container" id="products">
+        <h2 class="section-title">Danh Sách Loại Gmail</h2>
+        <div class="product-grid">
+
+            <div class="product-card">
+                <div>
+                    <div class="product-title">Gmail New (Mới Tạo)</div>
+                    <div class="product-price">3.000đ / acc</div>
+                    <ul class="product-features">
+                        <li>✅ Đăng ký thủ công IP Việt Nam</li>
+                        <li>✅ Định dạng: Email | Pass | Mail khôi phục</li>
+                        <li>✅ Bảo hành đăng nhập lần đầu</li>
+                    </ul>
+                </div>
+                <button class="btn-buy" onclick="openCheckout('Gmail New', 3000)">Mua Ngay</button>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-title">Gmail Cổ (2018 - 2022)</div>
+                    <div class="product-price">15.000đ / acc</div>
+                    <ul class="product-features">
+                        <li>✅ Tài khoản ngâm lâu, độ tin cậy cao</li>
+                        <li>✅ Ít bị Verify, thích hợp làm Ads/Seo</li>
+                        <li>✅ Full thông tin khôi phục</li>
+                        <li>✅ Bảo hành 7 ngày</li>
+                    </ul>
+                </div>
+                <button class="btn-buy" onclick="openCheckout('Gmail Cổ', 15000)">Mua Ngay</button>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-title">Gmail Kèm Google Ads</div>
+                    <div class="product-price">25.000đ / acc</div>
+                    <ul class="product-features">
+                        <li>✅ Đã ngâm sẵn, bật được 2FA</li>
+                        <li>✅ Tránh checkpoint khi lên chiến dịch</li>
+                        <li>✅ Đầy đủ file khôi phục</li>
+                        <li>✅ Bảo hành 1 đổi 1</li>
+                    </ul>
+                </div>
+                <button class="btn-buy" onclick="openCheckout('Gmail Google Ads', 25000)">Mua Ngay</button>
+            </div>
+
+        </div>
+
+        <!-- PHẦN LIÊN HỆ -->
+        <div class="contact-section" id="contact">
+            <h2 class="section-title" style="margin-bottom: 20px;">Thông Tin & Hỗ Trợ Khách Hàng</h2>
+            <div class="contact-grid">
+                
+                <!-- Kênh liên hệ cá nhân -->
+                <div>
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <p style="color: var(--text-sub); font-size: 0.95rem; margin-top: 5px;">
+                        Nếu có bất kỳ thắc mắc hoặc cần hỗ trợ bảo hành, vui lòng liên hệ qua các kênh dưới đây:
+                    </p>
+                    <ul class="contact-info-list">
+                        <li class="contact-info-item">
+                            <div class="contact-icon">📱</div>
+                            <div class="contact-text">
+                                <h4>Zalo</h4>
+                                <a href="https://zalo.me/0933710773" target="_blank">0933710773</a>
+                            </div>
+                        </li>
+                        <li class="contact-info-item">
+                            <div class="contact-icon">✈️</div>
+                            <div class="contact-text">
+                                <h4>Telegram</h4>
+                                <a href="https://t.me/baobellmrbeast" target="_blank">@baobellmrbeast</a>
+                            </div>
+                        </li>
+                        <li class="contact-info-item">
+                            <div class="contact-icon">🌐</div>
+                            <div class="contact-text">
+                                <h4>Facebook</h4>
+                                <a href="https://www.facebook.com/van.hddd/" target="_blank">facebook.com/van.hddd</a>
+                            </div>
+                        </li>
+                        <li class="contact-info-item">
+                            <div class="contact-icon">✉️</div>
+                            <div class="contact-text">
+                                <h4>Email Hỗ Trợ</h4>
+                                <a href="mailto:hadonvan@gmail.com">hadonvan@gmail.com</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Form gửi tin nhắn hỗ trợ gửi trực tiếp về hadonvan@gmail.com -->
+                <div class="contact-form">
+                    <h3>Gửi Yêu Cầu Hỗ Trợ</h3>
+                    <form action="https://formsubmit.co/hadonvan@gmail.com" method="POST">
+                        <!-- Tắt Captcha của Formsubmit để khách gửi nhanh hơn -->
+                        <input type="hidden" name="_captcha" value="false">
+                        <!-- Tiêu đề Email nhận được -->
+                        <input type="hidden" name="_subject" value="[BaoMail] Yêu cầu hỗ trợ mới từ khách hàng!">
+
+                        <div class="form-group">
+                            <label>Họ và Tên / Contact:</label>
+                            <input type="text" name="Ten_Khach_Hang" required placeholder="Nhập tên hoặc Username của bạn">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Liên Hệ Lại:</label>
+                            <input type="email" name="Email_Khach_Hang" required placeholder="Nhập email của bạn">
+                        </div>
+                        <div class="form-group">
+                            <label>Mã Đơn Hàng (nếu có):</label>
+                            <input type="text" name="Ma_Don_Hang" placeholder="Ví dụ: GMAIL123456">
+                        </div>
+                        <div class="form-group">
+                            <label>Nội dung cần hỗ trợ:</label>
+                            <textarea name="Noi_Dung" required placeholder="Mô tả chi tiết nội dung cần hỗ trợ..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-buy">Gửi Hỗ Trợ Trực Tiếp</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Contact Widget -->
+    <div class="floating-contact">
+        <a href="https://zalo.me/0933710773" target="_blank" class="float-btn float-zalo" title="Chat Zalo">Zalo</a>
+        <a href="https://t.me/baobellmrbeast" target="_blank" class="float-btn float-telegram" title="Chat Telegram">Tele</a>
+        <a href="https://www.facebook.com/van.hddd/" target="_blank" class="float-btn float-facebook" title="Chat Facebook">FB</a>
+    </div>
+
+    <!-- Popup Thanh Toán -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCheckout()">&times;</span>
+            <h3 style="margin-bottom: 15px;">Thanh Toán Đơn Hàng</h3>
+            
+            <form id="orderForm" onsubmit="processOrder(event)">
+                <div class="form-group">
+                    <label>Sản phẩm:</label>
+                    <input type="text" id="modalProductName" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Số lượng:</label>
+                    <input type="number" id="modalQuantity" value="1" min="1" onchange="updateTotal()">
+                </div>
+                <div class="form-group">
+                    <label>Email nhận tài khoản:</label>
+                    <input type="email" required placeholder="nhap-email-cua-ban@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label>Tổng tiền:</label>
+                    <input type="text" id="modalTotal" readonly style="font-weight: bold; color: var(--secondary-color);">
+                </div>
+                <button type="submit" class="btn-buy">Xác Nhận Thanh Toán</button>
+            </form>
+
+            <div class="qr-area" id="qrArea">
+                <h4 style="color: var(--primary-color);">Quét Mã QR VietQR Để Thanh Toán</h4>
+                
+                <img id="qrImage" src="" alt="Mã QR VietQR" style="max-width: 220px; border-radius: 8px; margin: 10px 0; border: 1px solid #ddd;">
+
+                <div class="bank-info">
+                    <p>🏦 <strong>Ngân hàng:</strong> Vietcombank (VCB)</p>
+                    <p>💳 <strong>Số tài khoản:</strong> <span style="color: #d32f2f; font-weight: bold;">7933710773</span></p>
+                    <p>👤 <strong>Chủ tài khoản:</strong> HA DON VAN</p>
+                    <p>📝 <strong>Nội dung CK:</strong> <strong id="transferCode" style="color: #1a73e8;"></strong></p>
+                </div>
+
+                <p style="font-size: 0.8rem; color: red; margin-top: 10px;">⚠️ Hệ thống sẽ tự động xác nhận và gửi tài khoản qua Email sau khi nhận đủ tiền!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 BaoMail - Hệ thống bán lẻ Gmail tự động.</p>
+        <p>Telegram: @baobellmrbeast | Zalo: 0933710773 | Facebook: van.hddd | Email: hadonvan@gmail.com</p>
+    </footer>
+
+    <script>
+        let currentUnitPrice = 0;
+        let currentRawTotal = 0;
+
+        function openCheckout(productName, price) {
+            currentUnitPrice = price;
+            document.getElementById('modalProductName').value = productName;
+            document.getElementById('modalQuantity').value = 1;
+            updateTotal();
+            
+            document.getElementById('qrArea').style.display = 'none';
+            document.getElementById('orderForm').style.display = 'block';
+            document.getElementById('checkoutModal').style.display = 'flex';
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').style.display = 'none';
+        }
+
+        function updateTotal() {
+            const qty = document.getElementById('modalQuantity').value;
+            currentRawTotal = qty * currentUnitPrice;
+            document.getElementById('modalTotal').value = currentRawTotal.toLocaleString('vi-VN') + ' VNĐ';
+        }
+
+        function processOrder(e) {
+            e.preventDefault();
+            document.getElementById('orderForm').style.display = 'none';
+            document.getElementById('qrArea').style.display = 'block';
+            
+            const code = 'GMAIL' + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('transferCode').innerText = code;
+
+            const qrApi = `https://img.vietqr.io/image/VCB-7933710773-compact2.png?amount=${currentRawTotal}&addInfo=${code}&accountName=HA%20DON%20VAN`;
+            document.getElementById('qrImage').src = qrApi;
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('checkoutModal');
+            if (event.target == modal) {
+                closeCheckout();
+            }
+        }
+    </script>
+</body>
+</html>
